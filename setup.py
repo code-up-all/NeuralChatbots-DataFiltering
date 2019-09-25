@@ -7,6 +7,7 @@ os.system('pip install -r requirements.txt')
 
 import requests
 import zipfile
+import zipfile, struct, io
 from clint.textui import progress
 
 
@@ -23,11 +24,16 @@ def download_data(url, zipped_path):
         file1.flush()
 
   # Extract file.
-  zip_file = gzip.open(zipped_path, 'w')
-  with gzip.open(zipped_path, 'rb') as f:
-    file_content = f.read()
-    zip_file.write(file_content)
-  
+ 
+  with open(zipped_path, 'rb') as f:
+    data = f.read()
+
+  i = data.rindex(b'PK\5\6') + 22
+  i += struct.unpack('<H', data[i-2: i])[0]
+  if data[i:].strip(b'\0') == b'':
+    data = data[:i]
+   
+  zf = zipfile.ZipFile(io.BytesIO(data))
  
 print('Do you want to download all datasets used in the paper (116 MB)? (y/n)')
 if input() == 'y':
