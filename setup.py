@@ -23,10 +23,11 @@ def download_data(url, zipped_path):
         file1.flush()
 
   # Extract file.
+  zip_file = gzip.open(zipped_path, 'w')
+  with gzip.open(zipped_path, 'rb') as f:
+    file_content = f.read()
+    zip_file.write(file_content)
   
-  
-  with gzip.open(zipped_path, 'rb') as s_file, open(zipped_path, 'wb') as d_file:
-        shutil.copyfileobj(s_file, d_file, block_size)
  
 print('Do you want to download all datasets used in the paper (116 MB)? (y/n)')
 if input() == 'y':
