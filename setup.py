@@ -1,5 +1,5 @@
 import os
-
+import gzip
 
 print('Installing requirements...')
 os.system('pip install -r requirements.txt')
@@ -22,7 +22,7 @@ def download_data(url, zipped_path):
         file.flush()
 
   # Extract file.
-  zip_file = zipfile.ZipFile(zipped_path, 'r')
+  zip_file = gzip.GzipFile(zipped_path, 'r')
   zip_file.extractall('')
   zip_file.close()
 
