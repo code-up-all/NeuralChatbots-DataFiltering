@@ -1,5 +1,6 @@
 import os
 import gzip
+import shutil
 
 print('Installing requirements...')
 os.system('pip install -r requirements.txt')
