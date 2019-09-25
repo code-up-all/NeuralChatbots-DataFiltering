@@ -23,19 +23,16 @@ def download_data(url, zipped_path):
         file1.flush()
 
   # Extract file.
-  #zip_file = gzip.GzipFile(zipped_path, 'w')
-  #zip_file.extractall('')
-  #zip_file.close()
+  zip_file = gzip.GzipFile(zipped_path, 'r')
+  gzip.decompress(zip_file)
+  zip_file.close()
  
   #handle = gzip.open(zipped_path, 'r')
   #with gzip.open(zipped_path, 'w') as out:
   #  for line in handle:
   #    out.write(line)
       
-  with gzip.open(zipped_path, 'rb') as f_in:
-    with open(zipped_path, 'wb') as f_out:
-        shutil.copyfileobj(f_in, f_out)
-
+ 
 print('Do you want to download all datasets used in the paper (116 MB)? (y/n)')
 if input() == 'y':
   download_data('https://github.com/ricsinaruto/website/blob/master/docs/data.zip?raw=true', 'data.zip')
