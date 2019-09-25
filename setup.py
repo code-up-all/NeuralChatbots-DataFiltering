@@ -13,19 +13,20 @@ def download_data(url, zipped_path):
   # Open the url and download the data with progress bars.
   data_stream = requests.get(url, stream=True)
 
-  with open(zipped_path, 'wb') as file:
+  with open(zipped_path, 'wb') as file1:
     total_length = int(data_stream.headers.get('content-length'))
     for chunk in progress.bar(data_stream.iter_content(chunk_size=1024),
                               expected_size=total_length / 1024 + 1):
       if chunk:
-        file.write(chunk)
-        file.flush()
+        file1.write(chunk)
+        file1.flush()
 
   # Extract file.
-  zip_file = gzip.GzipFile(zipped_path, 'r')
+  zip_file = zipfile.ZipFile(zipped_path, 'r')
   zip_file.extractall('')
   zip_file.close()
-
+ 
+  
 
 print('Do you want to download all datasets used in the paper (116 MB)? (y/n)')
 if input() == 'y':
