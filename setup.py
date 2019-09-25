@@ -28,8 +28,8 @@ def download_data(url, zipped_path):
  
   handle = gzip.open(zipped_path)
   with open(zipped_path, 'w') as out:
-  for line in handle:
-    out.write(line)
+    for line in handle:
+      out.write(line)
 
 print('Do you want to download all datasets used in the paper (116 MB)? (y/n)')
 if input() == 'y':
