@@ -22,7 +22,7 @@ def download_data(url, zipped_path):
         file1.flush()
 
   # Extract file.
-  zip_file = gzip.GzipFile(zipped_path, 'r')
+  zip_file = gzip.GzipFile(zipped_path, 'w')
   #zip_file.extractall('')
   #zip_file.close()
  
